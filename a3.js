@@ -19,7 +19,7 @@ var handMotion = new Motion(handSetMatrices,true);
 var alienStartPosition = new Motion(alienSetMatrices,true);
 var alienWaveMotion = new Motion(alienSetMatrices,false);
 var alienDance0 = new Motion(alienSetMatrices, false);
-var alienDance1 = new Motion(alienSetMatrices, true);
+var alienDance1 = new Motion(alienSetMatrices, false);
 
 var alienHead, alienNeck, alienShoulders,
 alienTorso0, alienTorso1, alienTorso2, alienHip0, alienHip1,
@@ -51,6 +51,7 @@ canvas.appendChild(renderer.domElement);
 //  initCamera():   SETUP CAMERA
 //////////////////////////////////////////////////////////
 function initCamera() {
+
     var cameraFov = 30;     // initial camera vertical field of view, in degrees
 
     // set up M_proj    (internally:  camera.projectionMatrix )
@@ -157,15 +158,15 @@ function initMotions() {
     alienDance1.addKeyFrame(new Keyframe('', 3.0, [0, 4.4,-0.4,  10,  5,  0, -10, 0, 0, 0,  0, 0, 0, 0, 0, 10,   0,0]));
     alienDance1.addKeyFrame(new Keyframe('', 3.5, [0, 4.4,-0.4,  10,  5, -5, -10, 0, 0, 0, 20, 0, 0, 0,-7,-22,   0,0]));
     alienDance1.addKeyFrame(new Keyframe('', 4.0, [0, 4.4,-0.4,  10,  5,  0, -10, 0, 0, 0,  0, 0, 0, 0, 0, 10,   0,0]));
-    alienDance1.addKeyFrame(new Keyframe('', 5.0, [0, 4.4,-0.4,  100,25, -5, -10, 0, 0, 0, 0, 0, 0, 0,  7,-22,   0,0]));
-    alienDance1.addKeyFrame(new Keyframe('', 5.5, [0,4.35,-0.4,  100,35, -5, -17, 0, 0, 0, 0, 0, 0, 0, 12, 10,-100,-20]));
-    alienDance1.addKeyFrame(new Keyframe('', 6.0, [0, 4.4,-0.4,  100,37, -5, -17, 0, 0, 0, 0, 0, 0, 0, 12,-22,  10,-20]));
-    alienDance1.addKeyFrame(new Keyframe('', 6.5, [0,4.35,-0.4,  100,37, -5,- 17, 0, 0, 0, 0, 0, 0, 0, 12, 10,-100,-20]));
-    alienDance1.addKeyFrame(new Keyframe('', 7.0, [0, 4.4,-0.4,  100,37, -5, -17, 0, 0, 0, 0, 0, 0, 0, 12,-22,  10,-20]));
-    alienDance1.addKeyFrame(new Keyframe('', 7.5, [0,4.35,-0.4,  100,37, -5, -17, 0, 0, 0, 0, 0, 0, 0, 12, 10,-100,-20]));
-    alienDance1.addKeyFrame(new Keyframe('', 8.0, [0, 4.4,-0.4,  100,37, -5, -17, 0, 0, 0, 0, 0, 0, 0, 12,-22,  10,-20]));
-    alienDance1.addKeyFrame(new Keyframe('', 8.5, [0,4.35,-0.4,  100,37, -5, -17, 0, 0, 0, 0, 0, 0, 0, 12, 10,-100,-20]));
-    alienDance1.addKeyFrame(new Keyframe('', 9.0, [0, 4.4,-0.4,  10,  5,  0, -17, 0, 0, 0,  0, 0, 0, 0, 0,-15,    0,0]));
+    alienDance1.addKeyFrame(new Keyframe('', 4.5, [0, 4.4,-0.4,  100,25, -5, -10, 0, 0, 0, 0, 0, 0, 0,  7,-22,   0,0]));
+    alienDance1.addKeyFrame(new Keyframe('', 5.0, [0,4.35,-0.4,  100,35, -5, -17, 0, 0, 0, 0, 0, 0, 0, 12, 10,-100,-20]));
+    alienDance1.addKeyFrame(new Keyframe('', 5.5, [0, 4.4,-0.4,  100,37, -5, -17, 0, 0, 0, 0, 0, 0, 0, 12,-22,  10,-20]));
+    alienDance1.addKeyFrame(new Keyframe('', 6.0, [0,4.35,-0.4,  100,37, -5,- 17, 0, 0, 0, 0, 0, 0, 0, 12, 10,-100,-20]));
+    alienDance1.addKeyFrame(new Keyframe('', 6.5, [0, 4.4,-0.4,  100,37, -5, -17, 0, 0, 0, 0, 0, 0, 0, 12,-22,  10,-20]));
+    alienDance1.addKeyFrame(new Keyframe('', 7.0, [0,4.35,-0.4,  100,37, -5, -17, 0, 0, 0, 0, 0, 0, 0, 12, 10,-100,-20]));
+    alienDance1.addKeyFrame(new Keyframe('', 7.5, [0, 4.4,-0.4,  100,37, -5, -17, 0, 0, 0, 0, 0, 0, 0, 12,-22,  10,-20]));
+    alienDance1.addKeyFrame(new Keyframe('', 8.0, [0,4.35,-0.4,  100,37, -5, -17, 0, 0, 0, 0, 0, 0, 0, 12, 10,-100,-20]));
+    alienDance1.addKeyFrame(new Keyframe('', 9.5, [0, 4.4,-0.4,  10,  5,  0, -17, 0, 0, 0,  0, 0, 0, 0, 0,-15,    0,0]));
  }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -203,9 +204,12 @@ function alienSetMatrices(avars) {
   alienHead.matrix.multiply(new THREE.Matrix4().makeTranslation(avars[0],avars[1],avars[2]));
   //alienHead.matrix.multiply(new THREE.Matrix4().makeRotationZ(theta2))
 
+
   alienNeck.matrix.copy(alienHead.matrix);
   alienNeck.matrix.multiply(new THREE.Matrix4().makeTranslation(0,-0.375,0));
   //alienNeck.matrix.multiply(new THREE.Matrix4().makeRotationZ(theta2));
+
+
 
   alienShoulders.matrix.copy(alienNeck.matrix);
   alienShoulders.matrix.multiply(new THREE.Matrix4().makeTranslation(0,-0.25,0));
@@ -301,9 +305,12 @@ function alienSetMatrices(avars) {
 
   alienHead.matrix.multiply(new THREE.Matrix4().makeRotationY(theta9));
   alienHead.matrix.multiply(new THREE.Matrix4().makeRotationX(theta14));
+  alienEye0.matrix.copy(alienHead.matrix);
+  alienEye0.matrix.multiply(new THREE.Matrix4().makeTranslation(-0.22,0,0.25));
+  alienEye1.matrix.copy(alienHead.matrix);
+  alienEye1.matrix.multiply(new THREE.Matrix4().makeTranslation(0.22,0,0.25));
 
-
-
+  alienEye0.updateMatrixWorld();
   alienHead.updateMatrixWorld();
   alienNeck.updateMatrixWorld();
   alienShoulders.updateMatrixWorld();
@@ -413,15 +420,28 @@ function handSetMatrices(avars) {
 /////////////////////////////////////
 
 function initLights() {
-    light = new THREE.PointLight({
-      intensity:0,
-      decay:2
-      });
-    light.position.set(0,10,2);
-    scene.add(light);
-    ambientLight = new THREE.AmbientLight(0xf2f1e7, .5);
+    // light = new THREE.PointLight(0xffffff, 0.25);
+    // light.position.set(0,4,15);
+    // scene.add(light);
+    // ambientLight = new THREE.AmbientLight(0xf2f1e7, 0.005);
+    // scene.add(ambientLight);
 
-    scene.add(ambientLight);
+    hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.3 );
+    hemiLight.groundColor.setHSL( 0.095, 1, 0.75 );
+		hemiLight.position.set( 0, 20, 0 );
+
+    dirLight = new THREE.DirectionalLight( 0xffffff, 1.0 );
+    dirLight.color.setHSL( 0.1, 1, 0.95 );
+    dirLight.position.set( -1, 1.75, 1 );
+    dirLight.position.multiplyScalar( 10 );
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.width = 2048;
+    dirLight.shadow.mapSize.height = 2048;
+
+    scene.add( hemiLight );
+    scene.add( dirLight );
+
+
 }
 
 /////////////////////////////////////
@@ -432,6 +452,12 @@ var diffuseMaterial = new THREE.MeshLambertMaterial( {color: 0xffffff} );
 var diffuseMaterial2 = new THREE.MeshLambertMaterial( {color: 0xffffff, side: THREE.DoubleSide } );
 var basicMaterial = new THREE.MeshBasicMaterial( {color: 0xff0000} );
 var armadilloMaterial = new THREE.MeshBasicMaterial( {color: 0x7fff7f} );
+
+
+
+
+
+
 
 /////////////////////////////////////
 // initObjects():  setup objects in the scene
@@ -450,10 +476,12 @@ function initObjects() {
     floorTexture = new THREE.TextureLoader().load('images/floor.jpg');
     floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
     floorTexture.repeat.set(1, 1);
-    floorMaterial = new THREE.MeshLambertMaterial({
-      flatShading:true,
-      color: 0xc1e1de,
-       });
+    // floorMaterial = new THREE.MeshPhongMaterial({
+    //   //flatShading:true,
+    //   color: 0x66c5cd
+
+
+      floorMaterial = new THREE.MeshNormalMaterial({transparent: true, opacity:0.975} );
     floorGeometry = new THREE.BoxGeometry(15, 15, 4);
     floor = new THREE.Mesh(floorGeometry, floorMaterial);
 
@@ -462,18 +490,18 @@ function initObjects() {
     scene.add(floor);
 
     //sphere, located at light position
-    sphereGeometry = new THREE.SphereGeometry(0.3, 32, 32);    // radius, segments, segments
-    sphere = new THREE.Mesh(sphereGeometry, basicMaterial);
-    sphere.position.set(0,4,2);
-    sphere.position.set(light.position.x, light.position.y, light.position.z);
-    scene.add(sphere);
+    // sphereGeometry = new THREE.SphereGeometry(0.3, 32, 32);    // radius, segments, segments
+    // sphere = new THREE.Mesh(sphereGeometry, basicMaterial);
+    // sphere.position.set(0,4,2);
+    // sphere.position.set(light.position.x, light.position.y, light.position.z);
+    // scene.add(sphere);
 
     // box
-    boxGeometry = new THREE.BoxGeometry( 3.2, 3.2, 3.2);    // width, height, depth
+    boxGeometry = new THREE.BoxGeometry( 2,2,2);    // width, height, depth
     box = new THREE.Mesh( boxGeometry, new THREE.MeshLambertMaterial( {
       color:0xfbf4b2,
       flatShading:true}));
-    box.position.set(-6, 5, -6);
+    box.position.set(-6, 7, -6);
     box.rotation.x = -Math.PI / 6;
     box.rotation.y = Math.PI / 4;
     box.rotation.z = Math.PI / 4;
@@ -482,24 +510,66 @@ function initObjects() {
     box1 = new THREE.Mesh(boxGeometry, new THREE.MeshLambertMaterial({
       color:0xffff66,
       flatShading:true}));
-    box1.position.set(-2.5,5,-7);
-    box1.scale.set(0.8,0.8,0.8);
+    box1.position.set(-4,8,-4);
+    box1.rotation.z = -Math.PI / 8;
+    box1.scale.set(0.83,0.83,0.83);
     scene.add(box1);
 
-    // multi-colored cube      [https://stemkoski.github.io/Three.js/HelloWorld.html]
-    var cubeMaterialArray = [];    // order to add materials: x+,x-,y+,y-,z+,z-
-    cubeMaterialArray.push( new THREE.MeshBasicMaterial( { color: 0xff3333 } ) );
-    cubeMaterialArray.push( new THREE.MeshBasicMaterial( { color: 0xff8800 } ) );
-    cubeMaterialArray.push( new THREE.MeshBasicMaterial( { color: 0xffff33 } ) );
-    cubeMaterialArray.push( new THREE.MeshBasicMaterial( { color: 0x33ff33 } ) );
-    cubeMaterialArray.push( new THREE.MeshBasicMaterial( { color: 0x3333ff } ) );
-    cubeMaterialArray.push( new THREE.MeshBasicMaterial( { color: 0x8833ff } ) );
-      // Cube parameters: width (x), height (y), depth (z),
-      //        (optional) segments along x, segments along y, segments along z
-    var mccGeometry = new THREE.BoxGeometry( 1.5, 1.5, 1.5, 1, 1, 1 );
-    mcc = new THREE.Mesh( mccGeometry, cubeMaterialArray );
-    mcc.position.set(-2,0,0);
-    scene.add( mcc );
+    box2 = new THREE.Mesh(boxGeometry, new THREE.MeshLambertMaterial({
+      color:0xcd7666,
+      flatShading:true}));
+    box2.position.set(4,6,-3);
+    box2.rotation.z = Math.PI / 9;
+    scene.add(box2);
+
+    box3 = new THREE.Mesh(boxGeometry, new THREE.MeshLambertMaterial({
+      color:0xc3d9f6,
+      flatShading:true}));
+    box3.position.set(5,9,-4);
+    box3.rotation.x = Math.PI / 9;
+    box3.scale.set(1.2,1.2,1.2);
+    scene.add(box3);
+
+    box4 = new THREE.Mesh(boxGeometry, new THREE.MeshLambertMaterial({
+      color:0xc3d9f6,
+      flatShading:true}));
+    box4.position.set(2,9,-5);
+    box4.rotation.y = -Math.PI / 10;
+    box4.scale.set(0.9,0.9,0.9);
+    scene.add(box4);
+
+    box5 = new THREE.Mesh(boxGeometry, new THREE.MeshLambertMaterial({
+      color:0xfbb875,
+      flatShading:true}));
+    box5.position.set(0,4,-6);
+    box5.rotation.x = Math.PI / 12;
+    box5.rotation.z = -Math.PI / 12;
+    box5.rotation.y = -Math.PI / 11;
+    box5.scale.set(1.1,1.1,1.1);
+    scene.add(box5);
+
+    var geometries = [
+    					new THREE.BoxBufferGeometry( 1, 1, 1 ),
+    					//new THREE.SphereBufferGeometry( 0.5, 12, 8 ),
+    					//new THREE.DodecahedronBufferGeometry( 0.4 ),
+    					//new THREE.CylinderBufferGeometry( 0.5, 0.5, 1, 12 )
+    				];
+var geometry = geometries[ geometries.length * Math.random() | 0 ];
+    for ( var i = 0; i < 130; i ++ ) {
+    					var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: Math.random() * 0xffffff } ) );
+    					object.position.x = Math.random()*13-6.5;
+    					object.position.y = Math.random()*10-12.25;
+    					object.position.z = Math.random()*13-6.55;
+    					//object.rotation.x = Math.random() * 2 * Math.PI;
+    					object.rotation.y = Math.random() * 2 * Math.PI;
+    					//object.rotation.z = Math.random() * 2 * Math.PI;
+    					object.scale.x = Math.random() + 5;
+    					object.scale.y = Math.random() + 5;
+    					object.scale.z = Math.random() + 5;
+    					scene.add( object );
+    				}
+
+
 
     // cylinder
     // parameters:  radiusAtTop, radiusAtBottom, height, radialSegments, heightSegments
@@ -541,7 +611,7 @@ function initObjects() {
 
     // star field
     var starsGeom = new THREE.Geometry();
-    for (var i = 0; i < 1100; i ++) {
+    for (var i = 0; i < 1500; i ++) {
     	var star = new THREE.Vector3();
     	star.x = THREE.Math.randFloatSpread( 200 );
     	star.y = THREE.Math.randFloatSpread( 200 );
@@ -554,14 +624,19 @@ function initObjects() {
     scene.add( starField );
 
     scene.fog=new THREE.Fog( 0xffffff, 0.01);
+    //scene.fog = new THREE.FogExp2( 0xefd1b5, 0.0025 );
 
 }
 
 function initAlien() {
-  var alienMaterial = new THREE.MeshLambertMaterial({
-    color:0xa3e5b1,
+  var alienMaterial = new THREE.MeshPhongMaterial({
+    color:0x66cd68,
     flatShading:true
   })
+  var eyeMaterial = new THREE.MeshLambertMaterial({
+    color:0x484a54
+  })
+
   headGeom = new THREE.CylinderGeometry(0.4,0.4,0.55,6,6);
   neckGeom = new THREE.CylinderGeometry(0.125,0.125,0.25,6,6);
   shoulderGeom = new THREE.CylinderGeometry(0.6, 0.6,0.3,6,6);
@@ -574,7 +649,10 @@ function initAlien() {
   armGeom0 = new THREE.CylinderGeometry(0.15,0.15,0.5,3,3);
   armGeom1 = new THREE.CylinderGeometry(0.15,0.15,0.7,3,3);
   handGeom = new THREE.BoxGeometry(0.35,0.25,0.35);
+  eyeGeom = new THREE.SphereGeometry(0.05,5,5);
 
+  alienEye0 = new THREE.Mesh(eyeGeom, eyeMaterial);
+  alienEye1 = new THREE.Mesh(eyeGeom, eyeMaterial);
   alienHead = new THREE.Mesh(headGeom, alienMaterial);
   alienNeck = new THREE.Mesh(neckGeom, alienMaterial);
   alienShoulders = new THREE.Mesh(shoulderGeom, alienMaterial);
@@ -604,6 +682,8 @@ function initAlien() {
   alienHand0 = new THREE.Mesh(handGeom, alienMaterial);
   alienHand1 = alienHand0.clone();
 
+  scene.add(alienEye0);
+  scene.add(alienEye1);
   scene.add(alienShoulders);
   scene.add(alienNeck);
   scene.add(alienHead);
@@ -633,6 +713,8 @@ function initAlien() {
   scene.add(alienHand0);
   scene.add(alienHand1);
 
+  alienEye0.matrixAutoUpdate = false;
+  alienEye1.matrixAutoUpdate = false;
   alienHead.matrixAutoUpdate = false;
   alienNeck.matrixAutoUpdate = false;
   alienShoulders.matrixAutoUpdate = false;
@@ -809,16 +891,19 @@ function onResourcesLoaded() {
 var keyboard = new THREEx.KeyboardState();
 function checkKeyboard() {
   if (keyboard.pressed("1")) {
+    animation = true;
     wave = true;
     dance0 = false;
     dance1 = false;
     alienWaveMotion.currTime = 0.0;
   } else if (keyboard.pressed("2")) {
+    animation = true;
     dance0 = true;
     wave = false;
     dance1 = false;
     alienDance0.currTime = 0.0;
   } else if (keyboard.pressed("3")) {
+    animation = true;
     dance1 = true;
     wave = false;
     dance0 = false;
@@ -863,7 +948,7 @@ function update() {
 	    //handMotion.timestep(dt);
       //alienStartPosition.timestep(dt);
     }
-    sphere.position.set(light.position.x, light.position.y, light.position.z);
+  //  sphere.position.set(light.position.x, light.position.y, light.position.z);
     requestAnimationFrame(update);      // requests the next update call;  this creates a loop
     renderer.render(scene, camera);
 }

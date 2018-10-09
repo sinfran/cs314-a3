@@ -2,6 +2,11 @@
   <head>
     <meta charset="UTF-8">
     <title>CPSC 314 Assignment 3 Sept 2018</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+    <link rel=stylesheet href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+
+
     <style>
       body {
         margin: 0;
@@ -9,9 +14,14 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        /* background: linear-gradient(#e4e0ba, #f7d9aa); */
-        background-image: linear-gradient( 135deg, #FAD7A1 10%, #E96D71 100%); /* By Webkul Software https://cssgradient.io/gradient-backgrounds/*/
+        background-image: linear-gradient( 135deg, #f3a183 15%, #dd3315 100%);
+        /*background-image: linear-gradient( 135deg, #FFAA85 10%, #B3315F 100%);*/
+      /*  background-image: linear-gradient( 135deg, #FAD7A1 10%, #E96D71 100%); *//* By Webkul Software https://cssgradient.io/gradient-backgrounds/*/
         }
+
+        /*#FFF6B7 → #F6416C
+#FFAA85 → #B3315F
+        */
         canvas {width: 100%;
       height: 100% }
     </style>
@@ -27,6 +37,15 @@
     <script src="js/SourceLoader.js"></script>
     <script src="js/OrbitControls.js"></script>
     <script src="js/KeyboardState.js"></script> <!-- By Jerome Etienne: http://jetienne.com/ -->
+    <script src="js/info.js"></script>
+
+<div align="center">
+<div id="infoBox" title="Demo Information">
+1: Wave<br />
+2: Dance 1<br />
+3: Dance 2
+</div>
+</div>
 
 <script id="customVertexShader" type="x-shader/x-vertex">
 varying vec3 varyingNormal;
