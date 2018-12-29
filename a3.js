@@ -4,11 +4,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 
 console.log('hello world');
-// a=5;
-// b=2.6;
-// console.log('a=',a,'b=',b);
-// myvector = new THREE.Vector3(0,1,2);
-// console.log('myvector =',myvector);
 
 var animation = true;
 
@@ -95,7 +90,6 @@ function init() {
     initObjects();
     //initHand();
     initAlien();
-    initFileObjects();
 
     window.addEventListener('resize',resize);
     resize();
@@ -166,7 +160,7 @@ function initMotions() {
     alienDance1.addKeyFrame(new Keyframe('', 7.0, [0,4.35,-0.4,  100,37, -5, -17, 0, 0, 0, 0, 0, 0, 0, 12, 10,-100,-20]));
     alienDance1.addKeyFrame(new Keyframe('', 7.5, [0, 4.4,-0.4,  100,37, -5, -17, 0, 0, 0, 0, 0, 0, 0, 12,-22,  10,-20]));
     alienDance1.addKeyFrame(new Keyframe('', 8.0, [0,4.35,-0.4,  100,37, -5, -17, 0, 0, 0, 0, 0, 0, 0, 12, 10,-100,-20]));
-    alienDance1.addKeyFrame(new Keyframe('', 9.5, [0, 4.4,-0.4,  10,  5,  0, -17, 0, 0, 0,  0, 0, 0, 0, 0,-15,    0,0]));
+    alienDance1.addKeyFrame(new Keyframe('', 8.5, [0,4.4,0,    0, 0,   0,    -3,0,0,0,0,0,0,0,0,-2,0,0]));
  }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -794,94 +788,6 @@ var customShaderMaterial2 = new THREE.ShaderMaterial ({
 
 var ctx = renderer.context;
 ctx.getShaderInfoLog = function () { return '' };   // stops shader warnings, seen in some browsers
-
-////////////////////////////////////////////////////////////////////////
-// initFileObjects():    read object data from OBJ files;  see onResourcesLoaded() for instances
-////////////////////////////////////////////////////////////////////////
-
-function initFileObjects() {
-        // list of OBJ files that we want to load, and their material
-    models = {
-//	bunny:     {obj:"obj/bunny.obj", mtl: diffuseMaterial, mesh: null},
-//	horse:     {obj:"obj/horse.obj", mtl: diffuseMaterial, mesh: null },
-//	minicooper:{obj:"obj/minicooper.obj", mtl: diffuseMaterial, mesh: null },
-//	trex:      { obj:"obj/trex.obj", mtl: normalShaderMaterial, mesh: null },
-// teapot:    {obj:"obj/teapot.obj", mtl: customShaderMaterial, mesh: null	},
-
-	armadillo: {obj:"obj/armadillo.obj", mtl: customShaderMaterial, mesh: null },
-	dragon:    {obj:"obj/dragon.obj", mtl: customShaderMaterial2, mesh: null }
-  };
-
-    var manager = new THREE.LoadingManager();
-    manager.onLoad = function () {
-	console.log("loaded all resources");
-	RESOURCES_LOADED = true;
-	 onResourcesLoaded();
-    }
-    var onProgress = function ( xhr ) {
-	if ( xhr.lengthComputable ) {
-	    var percentComplete = xhr.loaded / xhr.total * 100;
-	    console.log( Math.round(percentComplete, 2) + '% downloaded' );
-	}
-    };
-    var onError = function ( xhr ) {
-    };
-
-    // Load models;  asynchronous in JS, so wrap code in a fn and pass it the index
-    for( var _key in models ){
-	console.log('Key:', _key);
-	(function(key){
-	    var objLoader = new THREE.OBJLoader( manager );
-	    objLoader.load( models[key].obj, function ( object ) {
-		object.traverse( function ( child ) {
-		    if ( child instanceof THREE.Mesh ) {
-			child.material = models[key].mtl;
-			child.material.shading = THREE.SmoothShading;
-		    }	} );
-		models[key].mesh = object;
-		//scene.add( object );
-	    }, onProgress, onError );
-	})(_key);
-    }
-}
-
-/////////////////////////////////////////////////////////////////////////////////////
-// onResourcesLoaded():  once all OBJ files are loaded, this gets called
-//                       Object instancing is done here
-/////////////////////////////////////////////////////////////////////////////////////
-
-function onResourcesLoaded() {
-
- // Clone models into meshes;   [Michiel:  AFAIK this makes a "shallow" copy of the model,
- //                             i.e., creates references to the geometry, and not full copies ]
-    // meshes["armadillo1"] = models.armadillo.mesh.clone();
-    // meshes["armadillo2"] = models.armadillo.mesh.clone();
-    meshes["dragon1"] = models.dragon.mesh.clone();
-
-    // position the object instances and parent them to the scene, i.e., WCS
-    //
-    // meshes["armadillo1"].position.set(-6, 1.5, 2);
-    // meshes["armadillo1"].rotation.set(0,-Math.PI/2,0);
-    // meshes["armadillo1"].scale.set(1,1,1);
-    // scene.add(meshes["armadillo1"]);
-
-    // meshes["armadillo2"].position.set(-3, 1.5, 2);
-    // meshes["armadillo2"].rotation.set(0,-Math.PI/2,0);
-    // meshes["armadillo2"].scale.set(1,1,1);
-    // scene.add(meshes["armadillo2"]);
-
-    /*
-    meshes["dragon1"].position.set(0, 10, 0);
-    meshes["dragon1"].rotation.set(Math.PI,0, 0);
-
-    dragon2 = meshes["dragon1"].clone(); // "Add an extra dragon to your scene at a desired location and in a desired orientation"
-    dragon2.rotation.set(0,0,0);
-    dragon2.position.set(0,10,0);
-
-    scene.add(meshes["dragon1"]);
-    scene.add(dragon2);
-    */
-}
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
